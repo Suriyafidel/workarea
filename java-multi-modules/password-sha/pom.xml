@@ -16,6 +16,8 @@
 
     <properties>
         <commos.codec.version>1.11</commos.codec.version>
+        <appengine.app.version>10</appengine.app.version>       
+		<appengine.target.version>1.8.7</appengine.target.version>      
     </properties>
 
     <dependencies>

@@ -16,13 +16,59 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <junit.version>5.3.1</junit.version>
         <spring.version>5.1.0.RELEASE</spring.version>
-    </properties>
+		<java.level>1.8</java.level>
+		<encoding>UTF-8</encoding>
+		<project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+
+		<!-- Valeo -->
+		<valeo.cloudservices.version>1.5.1</valeo.cloudservices.version>
+		<valeo.contactsearch.version>1.4.2</valeo.contactsearch.version>
+		<valeo.rolesearch.version>1.2.0</valeo.rolesearch.version>
+		<valeo.organisationsearch.version>1.2.3</valeo.organisationsearch.version>
+
+		<!-- Google -->
+		<google.gae.version>1.9.60</google.gae.version>
+		<google.objectify.version>5.0.5</google.objectify.version>
+		<google.gcs-client.version>0.7</google.gcs-client.version>
+		<google.gdata.version>1.47.1</google.gdata.version>
+		<google.sheets-api.version>v4-rev504-1.22.0</google.sheets-api.version>
+
+		<!-- Runtime -->
+		<servlet.version>2.5</servlet.version>
+
+		<!-- Utils -->
+		<jersey.version>1.19.4</jersey.version>
+		<guava.version>18.0</guava.version>
+		<commons-codec.version>1.9</commons-codec.version>
+		<google-http-client.version>1.23.0</google-http-client.version>
+		<velocity.version>1.7</velocity.version>
+		<velocity-tools.version>2.0</velocity-tools.version>
+		<poi.version>3.10.1</poi.version>
+		<apache.config.version>1.10</apache.config.version>
+		<joda-time.version>2.9.9</joda-time.version>
+
+		<!-- Testing -->
+		<junit.version>4.12</junit.version>
+		<mockito.version>1.10.19</mockito.version>
+		<fest.version>1.4</fest.version>
+
+		<!-- Logging -->
+		<slf4j.version>1.7.25</slf4j.version>
+
+		<!-- Plugins -->
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<maven-war-plugin.version>3.2.0</maven-war-plugin.version>
+		<maven-ear-plugin.version>2.10.1</maven-ear-plugin.version>
+		<buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
+		<gmaven-plugin.version>1.5</gmaven-plugin.version>
+	</properties>
 
     <modules>
         <module>web</module>
         <module>password</module>
         <module>password-sha</module>
         <module>password-md5</module>
+        <module>password-ear</module>
     </modules>
 
     <dependencies>
@@ -33,25 +79,28 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
-        <!-- unit test -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
+        		<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>buildnumber-maven-plugin</artifactId>
+					<version>${buildnumber-maven-plugin.version}</version>
+					<executions>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>create</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<shortRevisionLength>5</shortRevisionLength>
+						<doCheck>false</doCheck>
+						<doUpdate>false</doUpdate>
+					</configuration>
+				</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -62,7 +111,18 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.1.1</version>
             </plugin>
+            <plugin>
+					<groupId>com.google.appengine</groupId>
+					<artifactId>appengine-maven-plugin</artifactId>
+					<version>${google.gae.version}</version>
+				</plugin>
+            
         </plugins>
     </build>
-
+<scm>
+		<url>https://github.com/VGCSR/vega-is-5axes</url>
+		<connection>scm:git:git@github.com:VGCSR/vega-is-5axes.git</connection>
+		<developerConnection>scm:git:git@github.com:VGCSR/vega-is-5axes.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 </project>
